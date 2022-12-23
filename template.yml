@@ -2,10 +2,49 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: Python file including external library
 Resources:
- SampleFunction:
-  Type: AWS::Serverless::Function
-  Properties:
-   Handler: Index.lambda_handler
-   Runtime: python3.7
-   FunctionName: SamplePython
-   CodeUri: ./src #Directory the source file is
+  SampleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+    Handler: Index.lambda_handler
+    Runtime: python3.7
+    FunctionName: SamplePython
+    CodeUri: ./src #Directory the source file is
+
+  # Execution role for the Lambda function
+  MyLambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: MyLambdaExecutionRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: MyLambdaPolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - apigateway:*
+                  - codedeploy:*
+                  - lambda:*
+                  - cloudformation:CreateChangeSet
+                  - iam:GetRole
+                  - iam:CreateRole
+                  - iam:DeleteRole
+                  - iam:PutRolePolicy
+                  - iam:AttachRolePolicy
+                  - iam:DeleteRolePolicy
+                  - iam:DetachRolePolicy
+                  - iam:PassRole
+                  - s3:GetObject
+                  - s3:GetObjectVersion 
+                  - s3:GetBucketVersioning
+
+                Resource: "*"
