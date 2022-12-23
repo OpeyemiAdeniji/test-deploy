@@ -8,7 +8,7 @@ Resources:
     Handler: Index.lambda_handler
     Runtime: python3.7
     FunctionName: SamplePython
-    CodeUri: ./src #Directory the source file is
+    CodeUri: requirements.txt #Directory the source file is
 
   # Execution role for the Lambda function
   MyLambdaExecutionRole:
