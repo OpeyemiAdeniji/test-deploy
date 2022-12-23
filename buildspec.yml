@@ -4,7 +4,7 @@ phases:
   runtime-versions:
    python: 3.7
   commands:
-   - pip install -r requirements.txt
+   - pip install -r /Users/opeyemiadeniji/Documents/test-deploy/src/requirements.txt
  build: 
   commands:
    - sam build
