@@ -7,6 +7,7 @@ phases:
   commands:
    - sam build
    - export BUCKET=test-pipeline-output-bucket12345
+   - export SAM_CLI_TELEMETRY=0
    - sam package --s3-bucket $BUCKET --output-template-file outputtemplate.yml
 artifacts:
  type: zip
